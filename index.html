@@ -296,6 +296,14 @@ p{text-wrap:pretty}
 .ms b{display:block;font-family:var(--f-head);font-size:16.5px}
 .ms span{color:var(--muted);font-size:14.5px}
 .ms em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-left:8px}
+/* animated roadmap: flowing light + pulsing now/goal */
+.ms::before{z-index:0}
+.ms::after{content:"";position:absolute;left:9px;width:6px;height:44px;border-radius:6px;background:linear-gradient(180deg,transparent 0%,rgba(246,185,59,.95) 34%,#fff 50%,rgba(255,46,126,.95) 66%,transparent 100%);filter:blur(.4px);opacity:.9;z-index:0;pointer-events:none;animation:msflow 3.6s ease-in-out infinite}
+@keyframes msflow{0%{top:4px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 50px);opacity:0}}
+.ms li.now .dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--gold);animation:nowpulse 2.1s ease-out infinite;pointer-events:none}
+@keyframes nowpulse{0%{transform:scale(.9);opacity:.75}100%{transform:scale(2.3);opacity:0}}
+.ms li.goal .dot{animation:goalbeacon 2.4s ease-in-out infinite}
+@keyframes goalbeacon{0%,100%{box-shadow:0 0 10px rgba(59,227,255,.45)}50%{box-shadow:0 0 22px rgba(59,227,255,.9)}}
 .funds{display:grid;grid-template-columns:1fr;gap:26px;justify-items:center}
 .funds .legend{width:100%}
 #donut svg{width:200px;height:200px}
