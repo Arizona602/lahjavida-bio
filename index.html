@@ -174,6 +174,8 @@ p{text-wrap:pretty}
 @media (max-width:860px){.parts{grid-template-columns:1fr}}
 .mol-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .mol-scroll .mol-svg{min-width:560px}
+/* phones: scale the whole molecule to fit instead of clipping it */
+@media (max-width:640px){.mol-scroll{overflow-x:visible}.mol-scroll .mol-svg{min-width:0;width:100%}}
 
 /* mechanism */
 #how{padding-top:clamp(56px,7vw,96px)}
