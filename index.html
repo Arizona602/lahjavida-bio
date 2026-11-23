@@ -198,7 +198,7 @@ p{text-wrap:pretty}
 .step.active .n{border-color:var(--gold);color:var(--gold);background:rgba(246,185,59,.1)}
 .step.active span.d{max-height:140px;opacity:1;margin-top:6px}
 .step::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:calc(var(--p,0)*100%);background:linear-gradient(90deg,var(--gold),var(--nir))}
-@media (max-width:900px){.mech{grid-template-columns:1fr}.stage{aspect-ratio:4/3.6}}
+@media (max-width:900px){.mech{grid-template-columns:1fr}.stage{aspect-ratio:auto;height:min(82vw,440px)}}
 
 /* compare */
 .cmp{border:1px solid var(--line);border-radius:22px;overflow:hidden}
@@ -1460,7 +1460,7 @@ function debounce(fn, ms) { let t; return () => { clearTimeout(t); t = setTimeou
     }
     for (const p of parts) if (p.ring > 0.05) { ctx.strokeStyle = `rgba(59,227,255,${p.ring})`; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(p.rx, p.ry, 14 * (1.6 - p.ring), 0, TAU); ctx.stroke(); }
     label('HEALTHY CELL', x, y + rr + Math.max(18, m * 0.06), 'rgba(59,227,255,.9)');
-    label('few OATP', x, y + rr + Math.max(32, m * 0.105), 'rgba(111,120,148,1)');
+    label('dye kept out', x, y + rr + Math.max(32, m * 0.105), 'rgba(111,120,148,1)');
   }
   function tumorPath(scale) {
     ctx.beginPath();
@@ -1496,11 +1496,11 @@ function debounce(fn, ms) { let t; return () => { clearTimeout(t); t = setTimeou
       ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, TAU); ctx.fill(); ctx.stroke();
     }
     label(T.dead ? 'TUMOR CELL · DESTROYED' : 'TUMOR CELL', T.x, T.y + T.r + Math.max(20, m * 0.065), 'rgba(255,127,174,.95)');
-    label('many OATP', T.x, T.y + T.r + Math.max(34, m * 0.11), 'rgba(111,120,148,1)');
+    label('dye drawn in', T.x, T.y + T.r + Math.max(34, m * 0.11), 'rgba(111,120,148,1)');
     if (step === 1 && !T.dead) {
       const gp = gatePos(gates[1]); const lx = Math.min(W - 12, gp.x + m * 0.16), ly = gp.y - m * 0.08;
       ctx.strokeStyle = 'rgba(246,185,59,.7)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gp.x + 6, gp.y - 4); ctx.lineTo(lx - 4, ly + 4); ctx.lineTo(lx + 2, ly + 4); ctx.stroke();
-      label('OATP TRANSPORTER', lx, ly, 'rgba(246,185,59,.95)', 'right');
+      label('UPTAKE SITE', lx, ly, 'rgba(246,185,59,.95)', 'right');
     }
   }
   function drawParticles() {
@@ -1576,7 +1576,8 @@ function debounce(fn, ms) { let t; return () => { clearTimeout(t); t = setTimeou
   layout(); setHud(); updatePlay();
   if (reduce) { for (let k = 0; k < 240; k++) update(); draw(); }
   window.addEventListener('resize', debounce(() => { layout(); if (reduce) { for (let k = 0; k < 240; k++) update(); draw(); } }, 200));
-  onVisible($('#stage'), v => { visible = v; if (v) { t0 = performance.now() - ((parseFloat(btns[step].style.getPropertyValue('--p')) || 0) * DUR); start(); } });
+  let laidOut = false;
+  onVisible($('#stage'), v => { visible = v; if (v) { if (!laidOut || c.clientHeight < 2) { layout(); laidOut = true; } t0 = performance.now() - ((parseFloat(btns[step].style.getPropertyValue('--p')) || 0) * DUR); start(); } });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) start(); });
 })();
 
