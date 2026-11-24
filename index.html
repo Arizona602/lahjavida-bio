@@ -1776,14 +1776,14 @@ function debounce(fn, ms) { let t; return () => { clearTimeout(t); t = setTimeou
 (() => {
   const TITLES = ['Making chemotherapy work better', 'The drugs work. The delivery hurts.', 'Better delivery is a proven market',
     'Change the delivery, not the payload', 'Why Lahjavida Bio, why now', 'One molecule. Three parts.', 'How DDC6 kills a tumor',
-    'The dye lights up the tumor', 'Beats cisplatin in lung cancer', 'Tumors shrank. Padcev’s grew.',
+    'The dye lights up the tumor', 'Beats cisplatin in lung cancer', 'Active where Nectin-4 is low.',
     'Tumor control in all three bladder models', 'Shrinks large, established tumors', 'Caged in blood. Better tolerated.',
     'Targeted delivery, or a well-caged drug?', 'No antigen needed', 'Broad entry, then follow the biology',
     'Technology inventors and a proven team', 'World-class advisors', 'First patients in H2 2028', '$6M open of an $8M seed',
-    'Science first', 'Thank you', 'Appendix', '$5.4M invested to date', 'A defensible patent portfolio', 'Tumor holds its payload',
+    'Science first', 'Thank you', 'Appendix', '$5.6M invested to date', 'A defensible patent portfolio', 'Tumor holds its payload',
     'Dose response and tolerability', 'What we know, what we’re testing', 'Conjugate and early oncology deals',
     'A pipeline built on one platform', 'Why antibodies fall short', 'The toxicities delivery must beat', 'Simplest to manufacture',
-    'Tested in organoids and mice'];
+    'Tested in mouse xenograft models'];
   const N = TITLES.length, D = document.getElementById('deck2'), img = document.getElementById('d2-slide');
   const count = document.getElementById('d2-count'), bar = document.getElementById('d2-progress'), anim = document.getElementById('d2-anim');
   const src = (k) => 'deck/s-' + String(k + 1).padStart(2, '0') + '.jpg';
